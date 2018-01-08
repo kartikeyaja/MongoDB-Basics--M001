@@ -1,0 +1,57 @@
+Q1: Connect to our class Atlas cluster from Compass and view the citybike.tripscollection. Use the schema view and any filters you feel are necessary to determine the range of values for the usertype field. Which of the following are values found in this collection for the field usertype?
+
+Ans>> "Customer"
+       "Subscriber"
+
+Q2: Connect to our class Atlas cluster from Compass and view the 100YWeatherSmall.datacollection. Using the Schema view, explore the wind field. The wind field has the value type of document. Which of the following best describes the schema of this embedded document?
+
+Ans>> Three field-- two with a value type "document" and one with a value type of "string".
+
+
+Q3: Connect to the M001 class Atlas cluster from Compass and view the 100YWeatherSmall.data collection. What is the value type of the "wind.speed.rate" field?
+
+Ans >>double
+
+
+Q4: Please connect to the M001 class Atlas cluster. You may answer this question using either the mongo shell or Compass.
+For this question we will use the citibike database.
+How many documents in the citibike.trips collection have the key tripduration set to null? Ignore any documents that do not contain the tripduration key.
+
+Ans>> 2
+There are two documents in citibike.trips that have the tripduration key set to null. 
+Using mongo shell:
+Connect to the M001 class Atlas cluster, use the below commands:
+use citibike
+db.trips.find({$and: [{tripduration: null}, {tripduration: {$exists: true}}]}).count()
+Using Compass: 
+Navigate to the citibike.trips collection and use filter in either the Schema or Documents view.
+{$and: [{tripduration: null}, {tripduration: {$exists: true}}]}
+
+
+
+Q5: Using the video.movieDetails collection, which of the queries below would produce output documents that resemble the following. Check all that apply.
+{ "title" : "P.S. I Love You" }
+{ "title" : "Love Actually" }
+{ "title" : "Shakespeare in Love" }
+NOTE: We are not asking you to consider specifically which documents would be output from the queries below, but rather what fields the output documents would contain.
+Ans>> db.movieDetails.find({},{title:1,_id:0})
+     db.movieDetails.find({year:1964},{title:1,_id:0})
+
+
+Q6: Please connect to the M001 class Atlas cluster from the mongo shell or Compass and view the video.movies collection. How many movies match the following criteria?
+The cast includes either of the following actors: "Jack Nicholson", "John Huston"
+The viewerRating is greater than 7
+The mpaaRating is "R".
+
+
+Ans>> 8
+
+Using Mongo shell:
+Connect to the M001 class Atlas cluster & used below commands:
+use video
+db.movies.find({cast: {$in: ["Jack Nicholson", "John Huston"]}, viewerRating: {$gt: 7}, mpaaRating: "R"}).count()
+Using Compass:
+Use video.movies collection and then apply the following filter in either the Schema or Documents view.
+{cast: {$in: ["Jack Nicholson", "John Huston"]}, viewerRating: {$gt: 7}, mpaaRating: "R"}
+
+
